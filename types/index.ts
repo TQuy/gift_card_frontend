@@ -4,6 +4,9 @@ export interface Brand {
   logo: string;
   description?: string;
   website?: string;
+  status: 'active' | 'inactive';
+  country: string;
+  products: number;
 }
 
 export interface GiftCard {

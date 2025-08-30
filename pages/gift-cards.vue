@@ -63,6 +63,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Brand, GiftCard } from '~/types'
+import { BRAND_LOGOS } from '~/constants/brands'
 
 interface Data {
   giftCards: GiftCard[]
@@ -115,32 +116,56 @@ export default Vue.extend<Data, Methods, {}, {}>({
         {
           id: 1,
           name: 'Lazada',
-          logo: 'https://upload.wikimedia.org/wikipedia/commons/9/9d/Lazada_%282019%29.svg'
+          logo: BRAND_LOGOS.lazada,
+          description: 'Leading e-commerce platform in Southeast Asia',
+          status: 'active' as const,
+          country: 'Singapore',
+          products: 156
         },
         {
           id: 2,
           name: 'Kaspersky',
-          logo: 'https://upload.wikimedia.org/wikipedia/commons/6/69/Kaspersky_Lab_logo_2012.svg'
+          logo: BRAND_LOGOS.kaspersky,
+          description: 'Cybersecurity and antivirus software',
+          status: 'active' as const,
+          country: 'Russia',
+          products: 45
         },
         {
           id: 3,
           name: 'Subway',
-          logo: 'https://upload.wikimedia.org/wikipedia/commons/7/78/Subway_2016_logo.svg'
+          logo: BRAND_LOGOS.subway,
+          description: 'Fast food restaurant franchise',
+          status: 'active' as const,
+          country: 'United States',
+          products: 89
         },
         {
           id: 4,
           name: 'Grab',
-          logo: 'https://upload.wikimedia.org/wikipedia/en/1/12/Grab_%28application%29_logo.svg'
+          logo: BRAND_LOGOS.grab,
+          description: 'Southeast Asia super app',
+          status: 'active' as const,
+          country: 'Singapore',
+          products: 78
         },
         {
           id: 5,
           name: 'Esprit',
-          logo: 'https://upload.wikimedia.org/wikipedia/commons/2/20/Esprit_logo.svg'
+          logo: BRAND_LOGOS.esprit,
+          description: 'International fashion brand',
+          status: 'inactive' as const,
+          country: 'Germany',
+          products: 234
         },
         {
           id: 6,
           name: 'Amazon',
-          logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg'
+          logo: BRAND_LOGOS.amazon,
+          description: 'Global e-commerce and cloud computing',
+          status: 'active' as const,
+          country: 'United States',
+          products: 312
         }
       ]
 
