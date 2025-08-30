@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brands</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .brands-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 20px;
+      align-items: center;
+      justify-items: center;
+    }
+
+    .brand-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100px;
+      transition: transform 0.2s;
+    }
+
+    .brand-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .brand-card img {
+      max-width: 100%;
+      max-height: 60px;
+      object-fit: contain;
+    }
+  </style>
+</head>
+<body>
+  <h1>Our Brands</h1>
+  <div class="brands-grid">
+    <div class="brand-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Lazada_%282019%29.svg" alt="Lazada Logo">
+    </div>
+    <div class="brand-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/Kaspersky_Lab_logo_2012.svg" alt="Kaspersky Logo">
+    </div>
+    <div class="brand-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Subway_2016_logo.svg" alt="Subway Logo">
+    </div>
+    <div class="brand-card">
+      <img src="https://upload.wikimedia.org/wikipedia/en/1/12/Grab_%28application%29_logo.svg" alt="Grab Logo">
+    </div>
+    <div class="brand-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/Esprit_logo.svg" alt="Esprit Logo">
+    </div>
+    <div class="brand-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon Logo">
+    </div>
+  </div>
+</body>
+</html>
