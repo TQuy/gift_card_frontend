@@ -88,19 +88,19 @@ export default Vue.extend<Data, Methods, Computed, Props>({
         {
           id: 1,
           name: 'Lazada',
-          logo: 'https://upload.wikimedia.org/wikipedia/commons/9/9d/Lazada_%282019%29.svg',
+          logo: 'https://upload.wikimedia.org/wikipedia/commons/4/4d/Lazada_%282019%29.svg',
           description: 'Online shopping platform'
         },
         {
           id: 2,
           name: 'Kaspersky',
-          logo: 'https://upload.wikimedia.org/wikipedia/commons/6/69/Kaspersky_Lab_logo_2012.svg',
+          logo: 'https://upload.wikimedia.org/wikipedia/commons/2/25/Kaspersky_logo.svg',
           description: 'Cybersecurity solutions'
         },
         {
           id: 3,
           name: 'Subway',
-          logo: 'https://upload.wikimedia.org/wikipedia/commons/7/78/Subway_2016_logo.svg',
+          logo: 'https://upload.wikimedia.org/wikipedia/commons/5/5c/Subway_2016_logo.svg',
           description: 'Fast food restaurant'
         },
         {
@@ -112,7 +112,7 @@ export default Vue.extend<Data, Methods, Computed, Props>({
         {
           id: 5,
           name: 'Esprit',
-          logo: 'https://upload.wikimedia.org/wikipedia/commons/2/20/Esprit_logo.svg',
+          logo: 'https://upload.wikimedia.org/wikipedia/commons/4/49/Esprit.svg',
           description: 'Fashion and lifestyle brand'
         },
         {
