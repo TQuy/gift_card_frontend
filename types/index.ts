@@ -3,9 +3,10 @@ export interface Brand {
   name: string;
   logo: string;
   description?: string;
-  website?: string;
-  status: 'active' | 'inactive';
+  isActive: boolean;
   country: string;
+  phoneNumber: string;
+  company: string;
   products: number;
 }
 
