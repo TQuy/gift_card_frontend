@@ -23,3 +23,24 @@ export interface GiftCard {
   discountPercentage?: number;
   isActive: boolean;
 }
+
+export interface GiftCardIssue {
+  deliveryType: 'personal' | 'gift';
+  senderName: string;
+  recipientName: string;
+  recipientEmail: string;
+  recipientPhone: string;
+  deliveryTime: 'immediately' | 'custom';
+  deliveryDate?: string;
+  period?: 'morning' | 'afternoon' | 'evening';
+  giftMessage: string;
+  amount: number;
+  brandId: number;
+}
+
+export interface GiftCardIssueResponse {
+  id: number;
+  giftCardNumber: string;
+  status: 'pending' | 'sent' | 'delivered';
+  createdAt: string;
+}

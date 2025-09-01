@@ -17,7 +17,7 @@ export async function fetchBrands(
   }
 }
 
-export function fetchBrandById($axios: NuxtAxiosInstance, id: number): Promise<Brand> {
-  return $axios.get(`/api/brands/${id}`)
-    .then(response => response.data.data)
+export async function fetchBrandById($axios: NuxtAxiosInstance, id: number): Promise<Brand> {
+  const response = await $axios.get(`/api/brands/${id}`)
+  return response.data.data
 }

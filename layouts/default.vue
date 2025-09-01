@@ -74,6 +74,26 @@
       <Nuxt />
     </v-main>
 
+    <!-- Snackbar for notifications -->
+    <v-snackbar
+      v-model="snackbar.show"
+      :color="snackbar.color"
+      :timeout="snackbar.timeout"
+      top
+      right
+    >
+      {{ snackbar.message }}
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          text
+          v-bind="attrs"
+          @click="snackbar.show = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
+
     <!-- Footer -->
     <v-footer color="grey darken-3" dark padless>
       <v-container>
@@ -90,11 +110,41 @@
 <script lang="ts">
 import Vue from 'vue'
 
+interface SnackbarData {
+  show: boolean
+  message: string
+  color: string
+  timeout: number
+}
+
 export default Vue.extend({
   name: 'DefaultLayout',
   data() {
     return {
-      drawer: false
+      drawer: false,
+      snackbar: {
+        show: false,
+        message: '',
+        color: 'success',
+        timeout: 4000
+      } as SnackbarData
+    }
+  },
+  mounted() {
+    // Listen for snackbar events
+    this.$nuxt.$on('show-snackbar', this.showSnackbar)
+  },
+  beforeDestroy() {
+    this.$nuxt.$off('show-snackbar', this.showSnackbar)
+  },
+  methods: {
+    showSnackbar({ message, color = 'success', timeout = 4000 }: { message: string; color?: string; timeout?: number }) {
+      this.snackbar = {
+        show: true,
+        message,
+        color,
+        timeout
+      }
     }
   }
 })
