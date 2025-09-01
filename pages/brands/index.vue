@@ -19,18 +19,15 @@
         md="3"
         lg="3"
       >
-        <BrandCard :brand="brand" />
+        <nuxt-link :to="`/brands/${brand.id}/issue`">
+          <BrandCard :brand="brand" />
+        </nuxt-link>
       </v-col>
     </v-row>
 
     <!-- Pagination -->
     <v-row class="mt-8">
       <v-col cols="12" class="d-flex justify-space-between align-center">
-        <!-- Results counter -->
-        <div class="grey--text">
-          {{ startIndex + 1 }}-{{ endIndex }} of {{ totalBrands }} results
-        </div>
-
         <!-- Pagination -->
         <v-pagination
           v-model="currentPage"
@@ -38,10 +35,13 @@
           :total-visible="7"
           circle
         />
+
+        <!-- Results counter -->
+        <div class="grey--text">
+          {{ startIndex + 1 }}-{{ endIndex }} of {{ totalBrands }} results
+        </div>
+
       </v-col>
-    </v-row>
-    <v-row>
-      brands: {{ brands }}
     </v-row>
   </v-container>
 </template>

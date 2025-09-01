@@ -113,60 +113,60 @@ export default Vue.extend<Data, Methods, {}, {}>({
     loadData() {
       // Mock brands data
       this.brands = [
-        {
-          id: 1,
-          name: 'Lazada',
-          logo: BRAND_LOGOS.lazada,
-          description: 'Leading e-commerce platform in Southeast Asia',
-          status: 'active' as const,
-          country: 'Singapore',
-          products: 156
-        },
-        {
-          id: 2,
-          name: 'Kaspersky',
-          logo: BRAND_LOGOS.kaspersky,
-          description: 'Cybersecurity and antivirus software',
-          status: 'active' as const,
-          country: 'Russia',
-          products: 45
-        },
-        {
-          id: 3,
-          name: 'Subway',
-          logo: BRAND_LOGOS.subway,
-          description: 'Fast food restaurant franchise',
-          status: 'active' as const,
-          country: 'United States',
-          products: 89
-        },
-        {
-          id: 4,
-          name: 'Grab',
-          logo: BRAND_LOGOS.grab,
-          description: 'Southeast Asia super app',
-          status: 'active' as const,
-          country: 'Singapore',
-          products: 78
-        },
-        {
-          id: 5,
-          name: 'Esprit',
-          logo: BRAND_LOGOS.esprit,
-          description: 'International fashion brand',
-          status: 'inactive' as const,
-          country: 'Germany',
-          products: 234
-        },
-        {
-          id: 6,
-          name: 'Amazon',
-          logo: BRAND_LOGOS.amazon,
-          description: 'Global e-commerce and cloud computing',
-          status: 'active' as const,
-          country: 'United States',
-          products: 312
-        }
+        // {
+        //   id: 1,
+        //   name: 'Lazada',
+        //   logo: BRAND_LOGOS.lazada,
+        //   description: 'Leading e-commerce platform in Southeast Asia',
+        //   status: 'active' as const,
+        //   country: 'Singapore',
+        //   products: 156
+        // },
+        // {
+        //   id: 2,
+        //   name: 'Kaspersky',
+        //   logo: BRAND_LOGOS.kaspersky,
+        //   description: 'Cybersecurity and antivirus software',
+        //   status: 'active' as const,
+        //   country: 'Russia',
+        //   products: 45
+        // },
+        // {
+        //   id: 3,
+        //   name: 'Subway',
+        //   logo: BRAND_LOGOS.subway,
+        //   description: 'Fast food restaurant franchise',
+        //   status: 'active' as const,
+        //   country: 'United States',
+        //   products: 89
+        // },
+        // {
+        //   id: 4,
+        //   name: 'Grab',
+        //   logo: BRAND_LOGOS.grab,
+        //   description: 'Southeast Asia super app',
+        //   status: 'active' as const,
+        //   country: 'Singapore',
+        //   products: 78
+        // },
+        // {
+        //   id: 5,
+        //   name: 'Esprit',
+        //   logo: BRAND_LOGOS.esprit,
+        //   description: 'International fashion brand',
+        //   status: 'inactive' as const,
+        //   country: 'Germany',
+        //   products: 234
+        // },
+        // {
+        //   id: 6,
+        //   name: 'Amazon',
+        //   logo: BRAND_LOGOS.amazon,
+        //   description: 'Global e-commerce and cloud computing',
+        //   status: 'active' as const,
+        //   country: 'United States',
+        //   products: 312
+        // }
       ]
 
       // Mock gift cards data

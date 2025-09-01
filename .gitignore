@@ -19,6 +19,7 @@ logs
 
 # Editor directories and files
 .vscode/
+.github/
 .idea/
 *.swp
 *.swo

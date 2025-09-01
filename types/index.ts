@@ -1,9 +1,14 @@
+export const BRAND_STATUS = {
+  ACTIVE: 1,
+  INACTIVE: 0
+} as const
+
 export interface Brand {
   id: number;
   name: string;
   logo: string;
   description?: string;
-  isActive: boolean;
+  status: typeof BRAND_STATUS[keyof typeof BRAND_STATUS];
   country: string;
   phoneNumber: string;
   company: string;

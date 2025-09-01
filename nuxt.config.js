@@ -41,7 +41,10 @@ export default {
     "@nuxtjs/tailwindcss",
     "@nuxtjs/vuetify",
   ],
-
+  // vuetify: {
+  //   treeShake: true, // only import used components
+  //   defaultAssets: false, // 🚫 don’t inject Roboto + icons
+  // },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ["@nuxtjs/axios"],
   // Axios module configuration
@@ -75,4 +78,4 @@ export default {
       // }
     },
   },
-};
+}

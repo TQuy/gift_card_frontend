@@ -10,11 +10,6 @@ export async function fetchBrands(
   const response = await $axios.get<BrandResponse>('/api/brands', {
     params: { page, limit }
   })
-  console.log({
-    brands: response.data.data,
-    pagination: response.data.pagination,
-    status: response.data.status
-  })
   return {
     brands: response.data.data,
     pagination: response.data.pagination,

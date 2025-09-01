@@ -19,12 +19,12 @@
     <!-- Status Badge -->
     <div class="d-flex justify-center mb-4">
       <v-chip
-        :color="brand.status === 'active' ? 'success' : 'error'"
+        :color="isActive(brand.status) ? 'success' : 'error'"
         text-color="white"
         small
         class="font-weight-bold"
       >
-        {{ brand.status }}
+        {{ isActive(brand.status) ? 'Active' : 'Inactive' }}
       </v-chip>
     </div>
 
@@ -48,7 +48,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Brand } from '~/types'
+import { Brand, BRAND_STATUS } from '~/types'
 
 export default Vue.extend({
   name: 'BrandCard',
@@ -59,6 +59,9 @@ export default Vue.extend({
     }
   },
   methods: {
+    isActive(status: number) {
+      return status === BRAND_STATUS.ACTIVE
+    },
     handleClick() {
       this.$emit('brand-selected', this.brand)
     }
