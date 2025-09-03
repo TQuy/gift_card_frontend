@@ -25,7 +25,7 @@ export interface GiftCard {
 }
 
 export interface GiftCardIssue {
-  deliveryType: 'personal' | 'gift';
+  deliveryType: 'personal' | 'send_as_gift';
   senderName: string;
   recipientName: string;
   recipientEmail: string;
@@ -33,7 +33,7 @@ export interface GiftCardIssue {
   deliveryTime: 'immediately' | 'custom';
   deliveryDate?: string;
   period?: 'morning' | 'afternoon' | 'evening';
-  giftMessage: string;
+  message: string;
   amount: number;
   brandId: number;
 }
