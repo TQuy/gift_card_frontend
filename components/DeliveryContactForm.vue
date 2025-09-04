@@ -10,11 +10,7 @@
         row
         @change="$emit('update:deliveryType', $event)"
       >
-        <v-radio
-          label="Personal"
-          value="personal"
-          class="mb-2"
-        ></v-radio>
+        <v-radio label="Personal" value="personal" class="mb-2"></v-radio>
         <v-radio
           label="Send as gift"
           value="send_as_gift"
@@ -131,82 +127,77 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-
-interface ContactFormData {
-  deliveryType: 'personal' | 'send_as_gift'
-  senderName: string
-  recipientName: string
-  recipientEmail: string
-  recipientPhone: string
-}
+import Vue from "vue";
 
 export default Vue.extend({
-  name: 'DeliveryContactForm',
+  name: "DeliveryContactForm",
   props: {
     deliveryType: {
-      type: String as () => 'personal' | 'send_as_gift',
-      default: 'personal'
+      type: String as () => "personal" | "send_as_gift",
+      default: "personal",
     },
     senderName: {
       type: String,
-      default: ''
+      default: "",
     },
     recipientName: {
       type: String,
-      default: ''
+      default: "",
     },
     recipientEmail: {
       type: String,
-      default: ''
+      default: "",
     },
     recipientPhone: {
       type: String,
-      default: ''
-    }
+      default: "",
+    },
   },
   computed: {
     deliveryTypeRules(): ((value: string) => boolean | string)[] {
-      return this.deliveryType === 'send_as_gift' ? [this.rules.required] : []
+      return this.deliveryType === "send_as_gift" ? [this.rules.required] : [];
     },
     senderNameRules(): ((value: string) => boolean | string)[] {
-      return this.deliveryType === 'send_as_gift' ? [this.rules.required] : []
+      return this.deliveryType === "send_as_gift" ? [this.rules.required] : [];
     },
     recipientNameRules(): ((value: string) => boolean | string)[] {
-      return this.deliveryType === 'send_as_gift' ? [this.rules.required] : []
+      return this.deliveryType === "send_as_gift" ? [this.rules.required] : [];
     },
     emailRules(): ((value: string) => boolean | string)[] {
-      return [this.rules.required, this.rules.email]
+      return [this.rules.required, this.rules.email];
     },
     phoneRules(): ((value: string) => boolean | string)[] {
-      return [this.rules.required, this.rules.phone]
+      return [this.rules.required, this.rules.phone];
     },
     rules() {
       return {
-        required: (value: string) => !!value || 'This field is required',
+        required: (value: string) => !!value || "This field is required",
         email: (value: string) => {
-          const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-          return pattern.test(value) || 'Please enter a valid email address'
+          const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          return pattern.test(value) || "Please enter a valid email address";
         },
         phone: (value: string) => {
-          const pattern = /^[0-9]+$/
-          return pattern.test(value) || 'Please enter a valid phone number (8 digits)'
-        }
-      }
-    }
+          const pattern = /^[0-9]+$/;
+          return (
+            pattern.test(value) ||
+            "Please enter a valid phone number (8 digits)"
+          );
+        },
+      };
+    },
   },
   methods: {
     isValidEmail(email: string): boolean {
-      if (!email) return false
-      const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-      return pattern.test(email)
+      if (!email) return false;
+      const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return pattern.test(email);
     },
 
     isValidPhone(phone: string): boolean {
-      if (!phone) return false
-      const pattern = /^[0-9]+$/
-      return pattern.test(phone)
-    }
-  }
-})
+      if (!phone) return false;
+      const pattern = /^[0-9]+$/;
+      return pattern.test(phone);
+    },
+  },
+});
 </script>

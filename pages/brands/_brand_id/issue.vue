@@ -19,8 +19,6 @@
               <GiftAmountSelector
                 :selectedAmount.sync="selectedAmount"
                 :customAmount.sync="formData.customAmount"
-                @amount-changed="onAmountChanged"
-                @custom-amount-changed="onCustomAmountChanged"
               />
             </div>
 
@@ -35,94 +33,13 @@
               />
             </div>
 
-            <!-- 3. Delivery Time -->
-            <div class="mb-6" v-if="formData.deliveryType === 'send_as_gift'">
-              <h3 class="section-title">Delivery time</h3>
-              <v-radio-group
-                v-model="formData.deliveryTime"
-                class="mt-0"
-                :rules="deliveryTimeRules"
-                row
-              >
-                <v-radio
-                  label="Immediately"
-                  value="immediately"
-                  class="mb-2"
-                ></v-radio>
-                <v-radio label="Custom" value="custom" class="mb-2"></v-radio>
-              </v-radio-group>
-
-              <!-- Delivery Date and Period (only show when Custom is selected) -->
-              <div v-if="formData.deliveryTime === 'custom'" class="mt-4">
-                <v-row>
-                  <v-col cols="12" md="5">
-                    <label class="block text-sm font-medium text-gray-700 mb-1">
-                      Delivery date
-                    </label>
-                    <v-menu
-                      v-model="dateMenu"
-                      :close-on-content-click="false"
-                      transition="scale-transition"
-                      offset-y
-                      min-width="auto"
-                    >
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-text-field
-                          v-model="formData.deliveryDate"
-                          label="Delivery date"
-                          placeholder="Select delivery date"
-                          outlined
-                          readonly
-                          v-bind="attrs"
-                          v-on="on"
-                          :rules="deliveryDateRules"
-                          :error-messages="errors.deliveryDate"
-                          class="delivery-date-field"
-                          hide-details
-                        >
-                          <template v-slot:append>
-                            <v-icon color="grey">mdi-calendar</v-icon>
-                          </template>
-                        </v-text-field>
-                      </template>
-                      <v-date-picker
-                        v-model="formData.deliveryDate"
-                        @input="dateMenu = false"
-                        :min="new Date().toISOString().slice(0, 10)"
-                      ></v-date-picker>
-                    </v-menu>
-                    <p
-                      v-if="
-                        !formData.deliveryDate &&
-                        formData.deliveryTime === 'custom'
-                      "
-                      class="text-red-500 text-sm"
-                    >
-                      * Please enter delivery date
-                    </p>
-                  </v-col>
-                  <v-col cols="12" md="7">
-                    <label class="block text-sm font-medium text-gray-700 mb-1">
-                      Period
-                    </label>
-                    <v-btn-toggle
-                      v-model="formData.period"
-                      mandatory
-                      class="period-buttons"
-                    >
-                      <v-btn value="morning" outlined class="px-4">
-                        Morning
-                      </v-btn>
-                      <v-btn value="afternoon" color="primary" class="px-4">
-                        Afternoon
-                      </v-btn>
-                      <v-btn value="evening" outlined class="px-4">
-                        Evening
-                      </v-btn>
-                    </v-btn-toggle>
-                  </v-col>
-                </v-row>
-              </div>
+            <div v-if="formData.deliveryType === 'send_as_gift'" class="mb-6">
+              <DeliveryTimeForm
+                :deliveryType="formData.deliveryType"
+                :deliveryTime.sync="formData.deliveryTime"
+                :deliveryDate.sync="formData.deliveryDate"
+                :period.sync="formData.period"
+              />
             </div>
 
             <div class="mb-6" v-if="formData.deliveryType === 'send_as_gift'">
@@ -159,6 +76,7 @@
                 </v-btn>
               </v-col>
             </v-row>
+            <v-row> formData: {{ formData }} </v-row>
           </v-form>
         </v-card>
       </v-col>
@@ -173,6 +91,7 @@ import { fetchBrandById } from "~/api/brands";
 import BrandDetailCard from "~/components/BrandDetailCard.vue";
 import GiftAmountSelector from "~/components/GiftAmountSelector.vue";
 import DeliveryContactForm from "~/components/DeliveryContactForm.vue";
+import DeliveryTimeForm from "~/components/DeliveryTimeForm.vue";
 
 interface FormData {
   deliveryType: "personal" | "send_as_gift";
@@ -202,6 +121,7 @@ export default Vue.extend({
     BrandDetailCard,
     GiftAmountSelector,
     DeliveryContactForm,
+    DeliveryTimeForm,
   },
   async asyncData({ params, $axios, error }) {
     try {
@@ -230,7 +150,6 @@ export default Vue.extend({
     return {
       valid: false,
       loading: false,
-      dateMenu: false,
       selectedAmount: 30 as string | number,
       brand: null as Brand | null,
       formData: {
@@ -293,7 +212,6 @@ export default Vue.extend({
       const giftMessageValid =
         this.formData.deliveryType === "personal" || this.formData.giftMessage;
 
-
       return !!(
         basicValid &&
         deliveryTypeValid &&
@@ -304,29 +222,6 @@ export default Vue.extend({
         this.isValidPhone(this.formData.recipientPhone)
       );
     },
-    brandKeywords(): string[] {
-      if (!this.brand) return [];
-      // Generate some sample keywords based on brand name
-      const brandName = this.brand.name.toLowerCase();
-      return [
-        brandName,
-        `${brandName} gift`,
-        `${brandName} voucher`,
-        "promo code",
-      ];
-    },
-    // Form validation rules
-    deliveryTimeRules(): ((value: string) => boolean | string)[] {
-      return this.formData.deliveryType === "send_as_gift"
-        ? [this.rules.required]
-        : [];
-    },
-    deliveryDateRules(): ((value: string) => boolean | string)[] {
-      return this.formData.deliveryType === "send_as_gift" &&
-        this.formData.deliveryTime === "custom"
-        ? [this.rules.required]
-        : [];
-    },
     giftMessageRules(): ((value: string) => boolean | string)[] {
       return this.formData.deliveryType === "send_as_gift"
         ? [this.rules.required]
@@ -334,12 +229,6 @@ export default Vue.extend({
     },
   },
   methods: {
-    onAmountChanged(newAmount: string | number) {
-      this.selectedAmount = newAmount;
-    },
-    onCustomAmountChanged(newCustomAmount: string) {
-      this.formData.customAmount = newCustomAmount;
-    },
     isValidEmail(email: string): boolean {
       if (!email) return false;
       const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
