@@ -28,11 +28,10 @@
             transition="scale-transition"
             offset-y
             min-width="auto"
-            @input="$emit('update:date-menu', dateMenu)"
           >
             <template v-slot:activator="{ on, attrs }">
               <v-text-field
-                v-model="deliveryDate"
+                :value="deliveryDate"
                 label="Delivery date"
                 class="delivery-date-field"
                 placeholder="Select delivery date"
@@ -42,7 +41,6 @@
                 v-on="on"
                 :rules="deliveryDateRules"
                 hide-details
-                @input="$emit('update:deliveryDate', $event)"
               >
                 <template v-slot:append>
                   <v-icon color="grey">mdi-calendar</v-icon>
@@ -50,9 +48,9 @@
               </v-text-field>
             </template>
             <v-date-picker
-              v-model="deliveryDate"
+              :value="deliveryDate"
               :min="new Date().toISOString().slice(0, 10)"
-              @input="dateMenu = false"
+              @input="handlePickDate"
             ></v-date-picker>
           </v-menu>
           <p
@@ -116,6 +114,12 @@ export default Vue.extend({
     return {
       dateMenu: false,
     } as DeliveryTimeData;
+  },
+  methods: {
+    handlePickDate(date: string) {
+      this.$emit("update:deliveryDate", date);
+      this.dateMenu = false;
+    },
   },
   computed: {
     deliveryTimeRules() {
