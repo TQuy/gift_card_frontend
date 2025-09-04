@@ -25,22 +25,30 @@ export interface GiftCard {
 }
 
 export interface GiftCardIssue {
-  deliveryType: 'personal' | 'send_as_gift';
-  senderName: string;
-  recipientName: string;
+  amount: number;
   recipientEmail: string;
   recipientPhone: string;
+  deliveryType: 'personal' | 'send_as_gift';
   deliveryTime: 'immediately' | 'custom';
+  message: string;
+  senderName: string;
+  recipientName: string;
   deliveryDate?: string;
   period?: 'morning' | 'afternoon' | 'evening';
-  message: string;
-  amount: number;
   brandId: number;
 }
 
 export interface GiftCardIssueResponse {
-  id: number;
-  giftCardNumber: string;
-  status: 'pending' | 'sent' | 'delivered';
-  createdAt: string;
+  id: string;
+  brandName: string;
+  amount: number;
+  activationCode: string;
+  recipientEmail: string;
+  recipientPhone: string;
+  message: string;
+  deliveryType: 'personal' | 'send_as_gift';
+  deliveryTime: 'immediately' | 'custom';
+  issuedAt: string;
+  senderName: string;
+  recipientName: string;
 }

@@ -92,6 +92,7 @@ import BrandDetailCard from "~/components/BrandDetailCard.vue";
 import GiftAmountSelector from "~/components/GiftAmountSelector.vue";
 import DeliveryContactForm from "~/components/DeliveryContactForm.vue";
 import DeliveryTimeForm from "~/components/DeliveryTimeForm.vue";
+import { issueGiftCard } from "~/api/giftCard";
 
 interface FormData {
   deliveryType: "personal" | "send_as_gift";
@@ -278,18 +279,11 @@ export default Vue.extend({
         };
 
         // API call to submit the gift card issuance
-        const response = await this.$axios.post(
-          `/api/brands/${this.$route.params.brand_id}/issue`,
-          payload
-        );
-
+        const respData = await issueGiftCard(this.$axios, payload);
         this.$nuxt.$emit("show-snackbar", {
-          message: `Gift card issued successfully! Card number: ${response.data.giftCardNumber}`,
+          message: `Gift card issued successfully! Card number: ${respData.activationCode}`,
           color: "success",
         });
-
-        // Redirect to confirmation page or reset form
-        await this.$router.push(`/gift-cards/${response.data.id}`);
       } catch (err: any) {
         console.error("Error issuing gift card:", err);
 
