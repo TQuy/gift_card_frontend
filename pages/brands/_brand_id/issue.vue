@@ -76,7 +76,6 @@
                 </v-btn>
               </v-col>
             </v-row>
-            <v-row> formData: {{ formData }} </v-row>
           </v-form>
         </v-card>
       </v-col>
@@ -342,66 +341,3 @@ export default Vue.extend({
   },
 });
 </script>
-
-<!-- <style scoped>
-.v-btn-toggle .v-btn {
-  border: 1px solid #e0e0e0 !important;
-  margin: 2px !important;
-}
-
-.v-btn-toggle .v-btn.v-btn--active {
-  background-color: #1976d2 !important;
-  color: white !important;
-  border-color: #1976d2 !important;
-}
-
-/* Brand details styling */
-.brand-details {
-  text-align: left;
-}
-
-.detail-item {
-  padding: 8px 0;
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.detail-item:last-child {
-  border-bottom: none;
-}
-
-.detail-item strong {
-  display: block;
-  color: #333;
-  font-weight: 600;
-  margin-bottom: 4px;
-}
-
-/* Period button styling */
-.period-buttons .v-btn {
-  text-transform: none !important;
-  font-weight: 500 !important;
-  border-radius: 8px !important;
-  font-size: 14px !important;
-}
-
-/* Submit button enhancement */
-.submit-btn {
-  background: linear-gradient(45deg, #1976d2, #1565c0) !important;
-  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3) !important;
-  transition: all 0.3s ease !important;
-  text-transform: none !important;
-  font-weight: 600 !important;
-}
-
-.submit-btn:hover {
-  transform: translateY(-2px) !important;
-  box-shadow: 0 8px 24px rgba(25, 118, 210, 0.4) !important;
-}
-
-/* Responsive adjustments */
-@media (max-width: 960px) {
-  .brand-details {
-    text-align: center;
-  }
-}
-</style> -->
