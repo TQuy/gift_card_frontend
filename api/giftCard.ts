@@ -1,12 +1,6 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
 import { GiftCardIssue, GiftCardIssueResponse } from '~/types'
-
-// API Response types
-interface ApiResponse<T> {
-  data: T
-  status: string
-  message?: string
-}
+import { ApiResponse } from './types'
 
 
 // Gift Card API functions

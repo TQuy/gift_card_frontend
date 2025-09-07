@@ -10,9 +10,9 @@
             </span>
           </NuxtLink>
         </v-app-bar-title>
-        
+
         <v-spacer></v-spacer>
-        
+
         <!-- Desktop Navigation -->
         <v-btn-toggle class="d-none d-md-flex" borderless>
           <v-btn text to="/" exact class="mx-1">
@@ -23,15 +23,26 @@
             <v-icon left>mdi-store</v-icon>
             Brands
           </v-btn>
-          <v-btn text to="/gift-cards" class="mx-1">
-            <v-icon left>mdi-card-giftcard</v-icon>
-            Gift Cards
-          </v-btn>
+          <template>
+            <v-btn
+              v-if="$store.state.auth.user"
+              text
+              class="mx-1"
+              @click="handleLogout"
+            >
+              <v-icon left>mdi-logout</v-icon>
+              Logout
+            </v-btn>
+            <v-btn v-else text to="/login" class="mx-1">
+              <v-icon left>mdi-login</v-icon>
+              Login
+            </v-btn>
+          </template>
         </v-btn-toggle>
 
         <!-- Mobile Menu Button -->
-        <v-app-bar-nav-icon 
-          class="d-md-none" 
+        <v-app-bar-nav-icon
+          class="d-md-none"
           @click="drawer = !drawer"
         ></v-app-bar-nav-icon>
       </v-container>
@@ -48,7 +59,7 @@
             <v-list-item-title>Home</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        
+
         <v-list-item to="/brands" @click="drawer = false">
           <v-list-item-icon>
             <v-icon>mdi-store</v-icon>
@@ -57,7 +68,7 @@
             <v-list-item-title>Brands</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        
+
         <v-list-item to="/gift-cards" @click="drawer = false">
           <v-list-item-icon>
             <v-icon>mdi-card-giftcard</v-icon>
@@ -84,11 +95,7 @@
     >
       {{ snackbar.message }}
       <template v-slot:action="{ attrs }">
-        <v-btn
-          text
-          v-bind="attrs"
-          @click="snackbar.show = false"
-        >
+        <v-btn text v-bind="attrs" @click="snackbar.show = false">
           Close
         </v-btn>
       </template>
@@ -108,46 +115,67 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue from "vue";
 
 interface SnackbarData {
-  show: boolean
-  message: string
-  color: string
-  timeout: number
+  show: boolean;
+  message: string;
+  color: string;
+  timeout: number;
 }
 
 export default Vue.extend({
-  name: 'DefaultLayout',
+  name: "DefaultLayout",
   data() {
     return {
       drawer: false,
       snackbar: {
         show: false,
-        message: '',
-        color: 'success',
-        timeout: 4000
-      } as SnackbarData
-    }
+        message: "",
+        color: "success",
+        timeout: 4000,
+      } as SnackbarData,
+    };
   },
   mounted() {
     // Listen for snackbar events
-    this.$nuxt.$on('show-snackbar', this.showSnackbar)
+    this.$nuxt.$on("show-snackbar", this.showSnackbar);
   },
   beforeDestroy() {
-    this.$nuxt.$off('show-snackbar', this.showSnackbar)
+    this.$nuxt.$off("show-snackbar", this.showSnackbar);
   },
   methods: {
-    showSnackbar({ message, color = 'success', timeout = 4000 }: { message: string; color?: string; timeout?: number }) {
+    showSnackbar({
+      message,
+      color = "success",
+      timeout = 4000,
+    }: {
+      message: string;
+      color?: string;
+      timeout?: number;
+    }) {
       this.snackbar = {
         show: true,
         message,
         color,
-        timeout
-      }
-    }
-  }
-})
+        timeout,
+      };
+    },
+    handleLogout() {
+      // Call the logout action
+      this.$store.dispatch("auth/logout");
+
+      // Navigate to login page
+      this.$router.push("/login");
+
+      // Show success message
+      this.showSnackbar({
+        message: "Successfully logged out",
+        color: "success",
+      });
+    },
+  },
+});
 </script>
 
 <style>
@@ -220,11 +248,11 @@ export default Vue.extend({
     flex-direction: column;
     gap: 1rem;
   }
-  
+
   .nav-menu {
     gap: 1rem;
   }
-  
+
   .nav-brand {
     font-size: 1.2rem;
   }

@@ -30,7 +30,9 @@ export default {
   css: ["~/assets/css/main.css"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [
+    "~/plugins/auth-init.client.js"
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -47,6 +49,9 @@ export default {
   // },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ["@nuxtjs/axios"],
+
+  // Enable store
+  store: true,
   // Axios module configuration
   axios: {
     baseURL: "http://localhost:8000",

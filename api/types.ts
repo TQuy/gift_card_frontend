@@ -13,4 +13,17 @@ export interface BrandResponse {
   status: string;
 }
 
+export interface ApiResponse<T> {
+  data: T
+  status: string
+  message?: string
+}
 
+export interface UserResponse {
+  id: number;
+  username: string;
+  email: string;
+  role_id: number;
+  roleName: string;
+  isAdmin: boolean;
+}

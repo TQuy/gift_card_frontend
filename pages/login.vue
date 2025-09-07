@@ -79,6 +79,7 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { login } from "~/api/auth";
 
 interface FormData {
   email: string;
@@ -142,12 +143,14 @@ export default Vue.extend({
       this.loading = true;
 
       try {
-        // Simulate API call delay
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        // Call login API
+        const response = await login(this.$axios, {
+          email: this.formData.email,
+          password: this.formData.password,
+        });
 
-        // TODO: Replace with actual API call
-        console.log("Login form data:", this.formData);
-        console.log("Remember me:", this.rememberMe);
+        // Use the store action instead of direct commit
+        await this.$store.dispatch("auth/login", response.data);
 
         // Show success message
         this.$nuxt.$emit("show-snackbar", {
