@@ -14,7 +14,7 @@
         <v-spacer></v-spacer>
 
         <!-- Desktop Navigation -->
-        <v-btn-toggle class="d-none d-md-flex" borderless>
+        <div class="d-none d-md-flex">
           <v-btn text to="/" exact class="mx-1">
             <v-icon left>mdi-home</v-icon>
             Home
@@ -38,7 +38,7 @@
               Login
             </v-btn>
           </template>
-        </v-btn-toggle>
+        </div>
 
         <!-- Mobile Menu Button -->
         <v-app-bar-nav-icon
