@@ -25,3 +25,12 @@ export async function register(
   })
   return response.data
 }
+export async function logout(
+  $axios: NuxtAxiosInstance,
+) {
+  const response = await $axios.post<{
+    status: string;
+    message: string;
+  }>('/api/auth/logout')
+  return response.data
+}

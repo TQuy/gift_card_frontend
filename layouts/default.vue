@@ -116,6 +116,7 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { logout } from "~/api/auth";
 
 interface SnackbarData {
   show: boolean;
@@ -161,13 +162,11 @@ export default Vue.extend({
         timeout,
       };
     },
-    handleLogout() {
-      // Call the logout action
+    async handleLogout() {
+      await logout(this.$axios);
       this.$store.dispatch("auth/logout");
-
       // Navigate to login page
       this.$router.push("/login");
-
       // Show success message
       this.showSnackbar({
         message: "Successfully logged out",
