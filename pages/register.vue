@@ -83,6 +83,7 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { register } from "~/api/auth";
 
 interface FormData {
   email: string;
@@ -157,7 +158,11 @@ export default Vue.extend({
 
       try {
         // Simulate API call delay
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        const userData = await register(this.$axios, {
+          email: this.formData.email,
+          password: this.formData.password,
+        });
+        this.$store.dispatch("auth/register", userData);
 
         // TODO: Replace with actual API call
         console.log("Register form data:", this.formData);
@@ -168,8 +173,8 @@ export default Vue.extend({
           color: "success",
         });
 
-        // Redirect to login page
-        await this.$router.push("/login");
+        // Redirect to home page
+        await this.$router.push("/");
       } catch (error) {
         console.error("Registration error:", error);
 

@@ -16,10 +16,8 @@ export async function register(
   $axios: NuxtAxiosInstance,
   { email, password }: { email: string, password: string },
 ) {
-  const response = await $axios.post<{
-    status: string;
-  }>('/api/auth/register', {
-    username: email,
+  const response = await $axios.post<ApiResponse<UserResponse>>('/api/auth/register', {
+    username: email, // use email for username
     email,
     password
   })
@@ -28,9 +26,6 @@ export async function register(
 export async function logout(
   $axios: NuxtAxiosInstance,
 ) {
-  const response = await $axios.post<{
-    status: string;
-    message: string;
-  }>('/api/auth/logout')
+  const response = await $axios.post<ApiResponse<null>>('/api/auth/logout')
   return response.data
 }

@@ -24,19 +24,8 @@
               <v-icon left>mdi-store</v-icon>
               Browse Brands
             </v-btn>
-            <v-btn
-              large
-              outlined
-              color="white"
-              class="white--text font-weight-bold"
-              to="/gift-cards"
-            >
-              <v-icon left>mdi-card-giftcard</v-icon>
-              View Gift Cards
-            </v-btn>
           </div>
         </v-card>
-        $store.state.auth.user: {{ $store.state.auth.user }}
       </v-col>
     </v-row>
 

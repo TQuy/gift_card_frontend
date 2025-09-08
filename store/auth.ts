@@ -1,6 +1,7 @@
 import { UserResponse } from "~/api/types"
 import { StateStore } from "./types"
 import { Action, ActionContext } from "vuex"
+import { register } from "module"
 
 // Global state
 export const state = () => ({
@@ -46,6 +47,9 @@ export const actions = {
   },
   logout({ commit }: ActionContext<StateStore, any>) {
     commit('clearUser')
+  },
+  async register({ commit }: ActionContext<StateStore, any>, userData: UserResponse) {
+    commit('setUser', userData);
   },
   initializeAuth({ commit }: ActionContext<StateStore, any>) {
     commit('initializeStore')
